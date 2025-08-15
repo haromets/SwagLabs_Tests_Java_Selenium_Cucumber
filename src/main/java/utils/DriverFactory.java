@@ -19,6 +19,10 @@ public class DriverFactory {
         ));
 //        mvn clean test -Dheadless=true
 //        options.addArguments("--headless=new");
+        String headlessProp = System.getProperty("headless");
+        if ("true".equalsIgnoreCase(headlessProp)) {
+            options.addArguments("--headless=new");
+        }
         if (driver == null) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver(options);
