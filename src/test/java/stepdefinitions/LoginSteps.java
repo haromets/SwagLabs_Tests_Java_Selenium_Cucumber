@@ -1,7 +1,7 @@
 package stepdefinitions;
 
 import io.cucumber.java.en.*;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.DriverFactory;
@@ -36,7 +36,7 @@ public class LoginSteps {
     @Then("User should see {string}")
     public void userShouldSee(String arg0) {
         String errorMessage = driver.findElement(By.cssSelector("h3[data-test='error']")).getText();
-        Assert.assertEquals(arg0, errorMessage);
+        Assertions.assertEquals(arg0, errorMessage);
     }
 
 

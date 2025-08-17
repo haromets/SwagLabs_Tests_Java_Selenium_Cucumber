@@ -4,7 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,10 +33,10 @@ public class CheckoutSteps {
         By badge = By.className("shopping_cart_badge");
         WaitUtils.waitForTextInElement(driver, badge, amountOfItems, 5);
         String totalAmountOfItems = driver.findElement(By.className("shopping_cart_badge")).getText();
-        Assert.assertEquals(
-                "The amount of items in the cart does not match the expected total!",
+        Assertions.assertEquals(
                 amountOfItems,
-                totalAmountOfItems
+                totalAmountOfItems,
+                "The amount of items in the cart does not match the expected total!"
         );
     }
 
@@ -84,18 +84,20 @@ public class CheckoutSteps {
             Double actualPrice = actualPrices.get(i);
 
             // Verify name
-            Assert.assertEquals(
+            Assertions.assertEquals(
+                    expectedName,
+                    actualName,
                     "Mismatch in product name at index " + i +
-                            " | Expected: " + expectedName + " | Actual: " + actualName,
-                    expectedName, actualName
+                            " | Expected: " + expectedName + " | Actual: " + actualName
             );
 
             // Verify price
-            Assert.assertEquals(
+            Assertions.assertEquals(
+                    expectedPrice,
+                    actualPrice,
                     "Mismatch in product price at index " + i +
                             " (" + expectedName + ")" +
-                            " | Expected: " + expectedPrice + " | Actual: " + actualPrice,
-                    expectedPrice, actualPrice
+                            " | Expected: " + expectedPrice + " | Actual: " + actualPrice
             );
 
         }
@@ -122,7 +124,7 @@ public class CheckoutSteps {
         }
         String totalPrice = driver.findElement(By.className("summary_subtotal_label")).getText().replace("Item total: $", "");
         Double expectedTotalPrice = Double.parseDouble(totalPrice);
-        Assert.assertEquals("Total price does not match", expectedTotalPrice, actualTotalPrice);
+        Assertions.assertEquals(expectedTotalPrice, actualTotalPrice,"Total price does not match");
     }
 
     @Then("verify the final price including tax")
@@ -138,8 +140,8 @@ public class CheckoutSteps {
         double tax = Double.parseDouble(taxText);
         double expectedTotal = subtotal + tax;
 
-        Assert.assertEquals("Final price including tax does not match",
-                expectedTotal, Double.parseDouble(totalText), 0.01);
+        Assertions.assertEquals(
+                expectedTotal, Double.parseDouble(totalText), 0.01,"Final price including tax does not match");
     }
 
     @When("User clicks on Finish button")
@@ -150,7 +152,7 @@ public class CheckoutSteps {
     @And("verify the order should be completed successfully")
     public void verifyTheOrderShouldBeCompletedSuccessfully() {
         String completeHeader = driver.findElement(By.className("complete-header")).getText();
-        Assert.assertEquals("Thank you for your order!", completeHeader);
+        Assertions.assertEquals("Thank you for your order!", completeHeader);
     }
 
 }

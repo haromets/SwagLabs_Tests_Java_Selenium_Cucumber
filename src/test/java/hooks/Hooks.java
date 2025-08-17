@@ -8,11 +8,13 @@ public class Hooks {
 
     @Before
     public void setup() {
+        System.out.println(">>> Starting browser for scenario");
         DriverFactory.getDriver();
     }
 
     @After
     public void teardown() {
+        System.out.println("<<< Closing browser for scenario");
         DriverFactory.quitDriver();
     }
 

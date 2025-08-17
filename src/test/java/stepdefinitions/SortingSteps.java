@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Assertions;
 
 public class SortingSteps {
     WebDriver driver = DriverFactory.getDriver();
@@ -52,8 +52,11 @@ public class SortingSteps {
                 expectedNames.sort(Collections.reverseOrder());
             }
 
-            assertEquals("Product name sorting failed for: " + sortOption, expectedNames, actualNames);
-
+            Assertions.assertEquals(
+                    expectedNames,
+                    actualNames,
+                    "Product name sorting failed for: " + sortOption
+            );
         } else if (sortOption.contains("Price")) {
             List<WebElement> priceElements = driver.findElements(By.className("inventory_item_price"));
             List<Double> actualPrices = new ArrayList<>();
@@ -68,7 +71,11 @@ public class SortingSteps {
                 expectedPrices.sort(Collections.reverseOrder());
             }
 
-            assertEquals("Product price sorting failed for: " + sortOption, expectedPrices, actualPrices);
+            Assertions.assertEquals(
+                    expectedPrices,
+                    actualPrices,
+                    "Product price sorting failed for: " + sortOption
+            );
         }
     }
 }

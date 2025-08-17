@@ -1,8 +1,8 @@
 # Test Automation Project
 
 ## Overview
-This project is a test automation suite developed to evaluate the programming skills of a Test Automation Engineer for Validaide. 
-It uses Selenium WebDriver, Cucumber, and JUnit to automate functional tests for the SauceDemo e-commerce website. 
+This project is a test automation suite developed to evaluate the programming skills of a Test Automation Engineer for Validaide.
+It uses Selenium WebDriver, Cucumber, and JUnit to automate functional tests for the SauceDemo e-commerce website.
 The tests cover key functionalities such as login, product sorting, and checkout processes, ensuring robust validation of the application's behavior.
 
 ## Project Structure
@@ -33,13 +33,17 @@ The tests cover key functionalities such as login, product sorting, and checkout
    The `WebDriverManager` library automatically handles ChromeDriver setup. Ensure an active internet connection for the initial setup.
 
 4. **Run Tests**:
-   Execute the tests using Maven:
+   Execute the tests using Maven (parallel execution is enabled by default):
    ```bash
    mvn clean test
    ```
    To run in headless mode, use:
    ```bash
    mvn clean test -Dheadless=true
+   ```
+   To disable parallel execution, use:
+   ```bash
+   mvn clean test -Dcucumber.execution.parallel.enabled=false
    ```
 
 5. **View Test Reports**:
@@ -48,7 +52,7 @@ The tests cover key functionalities such as login, product sorting, and checkout
 ## Future Improvements
 - Add support for other browsers (e.g., Firefox, Edge) in `DriverFactory`.
 - Enhance reporting with screenshots for failed tests.
-- Implement parallel test execution to reduce runtime.
+- Optimize parallel test execution for improved performance.
 
 ## Defect was found in application
 - **Partially Clickable Sort Button**:
